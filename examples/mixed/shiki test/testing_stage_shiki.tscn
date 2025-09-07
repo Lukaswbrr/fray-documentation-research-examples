@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://bgwni1j7pdm47"]
+
+[ext_resource type="PackedScene" uid="uid://vc4yfaiu2cse" path="res://examples/mixed/shiki test/testing_shiki.tscn" id="1_fkowl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_najk4"]
+size = Vector2(1216.5, 20)
+
+[node name="Node2D" type="CanvasLayer"]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="ground" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(605.75, 635)
+shape = SubResource("RectangleShape2D_najk4")
+
+[node name="wall1" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, 24)
+rotation = -1.57079
+shape = SubResource("RectangleShape2D_najk4")
+
+[node name="wall2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(1160, 24)
+rotation = -1.57079
+shape = SubResource("RectangleShape2D_najk4")
+
+[node name="Shiki" parent="." instance=ExtResource("1_fkowl")]
+position = Vector2(216, 630)

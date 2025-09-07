@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://da58jirstd0ce"]
+
+[ext_resource type="Script" uid="uid://tgg033hxxyuv" path="res://examples/misc/is_type_test/testing_fray.gd" id="1_lg2te"]
+
+[node name="TestingFray" type="Node2D"]
+script = ExtResource("1_lg2te")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

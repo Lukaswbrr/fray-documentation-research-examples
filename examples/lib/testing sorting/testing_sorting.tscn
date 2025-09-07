@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://qwdexvydrm5i"]
+
+[ext_resource type="Script" uid="uid://dlosph82h7b5f" path="res://examples/lib/testing sorting/testing_sorting.gd" id="1_o7phm"]
+
+[node name="TestingSorting" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_o7phm")

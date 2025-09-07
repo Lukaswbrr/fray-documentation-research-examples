@@ -1,0 +1,113 @@
+[gd_scene load_steps=15 format=3 uid="uid://dstgsx6pf3rgh"]
+
+[ext_resource type="Script" uid="uid://2f0qgch781og" path="res://examples/src/hit/2d/hitbox_state/character_2d.gd" id="1_ljl87"]
+[ext_resource type="Script" uid="uid://coyheirpdxili" path="res://addons/fray/src/hit/2d/hit_state_2d.gd" id="2_75gqh"]
+[ext_resource type="Script" uid="uid://bm7ks4fjcaih5" path="res://addons/fray/src/hit/2d/hitbox_2d.gd" id="3_ljl87"]
+[ext_resource type="Script" uid="uid://jtnxpcki81mm" path="res://examples/src/hit/2d/hitbox/hitbox_attributes_test.gd" id="4_b2tvs"]
+[ext_resource type="Script" uid="uid://b7knkovok4fgq" path="res://addons/fray/src/hit/hitbox_attribute.gd" id="5_2adbt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_75gqh"]
+size = Vector2(1149, 20)
+
+[sub_resource type="Gradient" id="Gradient_t1a0b"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_b158g"]
+gradient = SubResource("Gradient_t1a0b")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_67yu2"]
+size = Vector2(66, 63)
+
+[sub_resource type="Resource" id="Resource_xjncb"]
+script = ExtResource("4_b2tvs")
+color = Color(0, 0, 0, 1)
+damage = 0
+metadata/_custom_type_script = "uid://jtnxpcki81mm"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ljl87"]
+size = Vector2(67, 51)
+
+[sub_resource type="Resource" id="Resource_uhw6f"]
+script = ExtResource("5_2adbt")
+metadata/_custom_type_script = "uid://b7knkovok4fgq"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2adbt"]
+size = Vector2(75, 67)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ctmm2"]
+size = Vector2(63, 57)
+
+[node name="TestingHitboxState2d" type="CanvasLayer"]
+
+[node name="ground" type="StaticBody2D" parent="."]
+position = Vector2(623, 635)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ground"]
+position = Vector2(-45.5, 0)
+shape = SubResource("RectangleShape2D_75gqh")
+
+[node name="left wall" type="StaticBody2D" parent="."]
+position = Vector2(623, 635)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="left wall"]
+position = Vector2(-619, -384)
+rotation = -1.5708
+shape = SubResource("RectangleShape2D_75gqh")
+
+[node name="right wall" type="StaticBody2D" parent="."]
+position = Vector2(1762, 635)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="right wall"]
+position = Vector2(-619, -384)
+rotation = -1.5708
+shape = SubResource("RectangleShape2D_75gqh")
+
+[node name="Character2d" type="CharacterBody2D" parent="."]
+position = Vector2(166, 490)
+script = ExtResource("1_ljl87")
+
+[node name="Sprite2D" type="Sprite2D" parent="Character2d"]
+texture = SubResource("GradientTexture2D_b158g")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Character2d"]
+position = Vector2(1, 0.5)
+shape = SubResource("RectangleShape2D_67yu2")
+
+[node name="FrayHitState2D" type="Node2D" parent="Character2d" node_paths=PackedStringArray("source")]
+script = ExtResource("2_75gqh")
+source = NodePath("..")
+active_hitboxes = 1
+metadata/_editor_prop_ptr_source = NodePath("")
+
+[node name="FrayHitbox2D" type="Area2D" parent="Character2d/FrayHitState2D"]
+position = Vector2(65, 2)
+script = ExtResource("3_ljl87")
+attribute = SubResource("Resource_xjncb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Character2d/FrayHitState2D/FrayHitbox2D"]
+position = Vector2(38, 0)
+shape = SubResource("RectangleShape2D_ljl87")
+debug_color = Color(1, 0, 0, 0.5)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(623, 577)
+
+[node name="ColorRect" type="ColorRect" parent="StaticBody2D"]
+offset_left = -33.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 31.0
+
+[node name="FrayHitbox2D" type="Area2D" parent="StaticBody2D"]
+script = ExtResource("3_ljl87")
+attribute = SubResource("Resource_uhw6f")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D/FrayHitbox2D"]
+position = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_2adbt")
+debug_color = Color(0, 0, 0, 0.5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(1.5, 3.5)
+shape = SubResource("RectangleShape2D_ctmm2")
+
+[connection signal="hitbox_intersected" from="Character2d/FrayHitState2D" to="Character2d" method="_on_fray_hit_state_2d_hitbox_intersected"]

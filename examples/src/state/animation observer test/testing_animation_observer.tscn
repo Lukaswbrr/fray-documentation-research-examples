@@ -1,0 +1,101 @@
+[gd_scene load_steps=10 format=3 uid="uid://b1n7bt0wc3xif"]
+
+[ext_resource type="Script" uid="uid://b5t8mrt7j1jgb" path="res://examples/src/state/animation observer test/testing_animation_observer.gd" id="1_nun78"]
+[ext_resource type="Script" uid="uid://78nski7em6nf" path="res://addons/fray/src/state_mgmt/component/animation_observer.gd" id="1_qruvj"]
+[ext_resource type="Script" uid="uid://dsgeotwu34dvi" path="res://addons/fray/src/state_mgmt/component/anim_tracker/animator_tracker_animation_player.gd" id="3_ws4ol"]
+
+[sub_resource type="Resource" id="Resource_6fa2w"]
+script = ExtResource("3_ws4ol")
+anim_player_path = NodePath("../AnimationPlayer")
+metadata/_custom_type_script = "uid://dsgeotwu34dvi"
+
+[sub_resource type="Animation" id="Animation_qi10x"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_irud7"]
+resource_name = "aa"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_bef6l"]
+resource_name = "bb"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 0, 1, 1), Color(1, 0.388774, 0.415116, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_n8fft"]
+resource_name = "cc"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0.720005, 0.653141, 1), Color(0.75399, 0.604522, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_noeyr"]
+_data = {
+&"RESET": SubResource("Animation_qi10x"),
+&"aa": SubResource("Animation_irud7"),
+&"bb": SubResource("Animation_bef6l"),
+&"cc": SubResource("Animation_n8fft")
+}
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_nun78")
+
+[node name="FrayAnimationObserver" type="Node" parent="."]
+script = ExtResource("1_qruvj")
+tracker = SubResource("Resource_6fa2w")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_noeyr")
+}
+autoplay = "bb"
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.668
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

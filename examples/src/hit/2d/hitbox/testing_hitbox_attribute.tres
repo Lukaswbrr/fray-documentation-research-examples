@@ -1,0 +1,7 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://cym1gdtq4hlkw"]
+
+[ext_resource type="Script" uid="uid://bvqps6ojakhbr" path="res://examples/src/hit/2d/hitbox/hitbox_attribute_test.gd" id="1_3qmxm"]
+
+[resource]
+script = ExtResource("1_3qmxm")
+metadata/_custom_type_script = "uid://dr2m3vbd0ydct"

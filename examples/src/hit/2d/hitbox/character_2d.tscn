@@ -1,0 +1,41 @@
+[gd_scene load_steps=9 format=3 uid="uid://c35xol47gvw7b"]
+
+[ext_resource type="Script" uid="uid://sj338wv7a6da" path="res://examples/src/hit/2d/hitbox/character_2d.gd" id="1_ios3i"]
+[ext_resource type="Script" uid="uid://6s7cogi8pkry" path="res://examples/src/hit/2d/hitbox/character_hitbox.gd" id="2_t1a0b"]
+[ext_resource type="Script" path="res://learning/src/hit/hitbox_attributes.gd" id="3_b158g"]
+
+[sub_resource type="Gradient" id="Gradient_t1a0b"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_b158g"]
+gradient = SubResource("Gradient_t1a0b")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_67yu2"]
+size = Vector2(66, 63)
+
+[sub_resource type="Resource" id="Resource_67yu2"]
+script = ExtResource("3_b158g")
+metadata/_custom_type_script = "uid://dr2m3vbd0ydct"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0fr6h"]
+size = Vector2(123, 99)
+
+[node name="Character2d" type="CharacterBody2D"]
+script = ExtResource("1_ios3i")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("GradientTexture2D_b158g")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 0.5)
+shape = SubResource("RectangleShape2D_67yu2")
+
+[node name="FrayHitbox2D" type="Area2D" parent="."]
+script = ExtResource("2_t1a0b")
+detect_source_hitboxes = true
+attribute = SubResource("Resource_67yu2")
+metadata/_custom_type_script = "uid://0csh6mltml3a"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FrayHitbox2D"]
+position = Vector2(4, 0.5)
+shape = SubResource("RectangleShape2D_0fr6h")
+debug_color = Color(0, 0, 0, 0.5)

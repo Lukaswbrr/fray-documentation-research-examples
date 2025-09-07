@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dnvjwct6nipth"]
+
+[ext_resource type="Script" uid="uid://cn1mxlqjilmyx" path="res://examples/src/input/sequence_test.gd" id="1_b7ari"]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+script = ExtResource("1_b7ari")
