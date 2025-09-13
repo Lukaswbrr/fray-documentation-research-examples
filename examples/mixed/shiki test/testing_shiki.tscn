@@ -1,4 +1,4 @@
-[gd_scene load_steps=310 format=3 uid="uid://vc4yfaiu2cse"]
+[gd_scene load_steps=321 format=3 uid="uid://vc4yfaiu2cse"]
 
 [ext_resource type="Script" uid="uid://bw0fwoj4ifwp7" path="res://examples/mixed/shiki test/testing_shiki.gd" id="1_3gkhh"]
 [ext_resource type="Script" uid="uid://78nski7em6nf" path="res://addons/fray/src/state_mgmt/component/animation_observer.gd" id="2_3loud"]
@@ -265,7 +265,12 @@
 [ext_resource type="Texture2D" uid="uid://bw7iwg38llfgc" path="res://examples/mixed/shiki test/shiki/sprites/movement/walk_forward/shi26_016.png" id="260_5etiu"]
 [ext_resource type="Texture2D" uid="uid://d0rm34c3wyp3s" path="res://examples/mixed/shiki test/shiki/sprites/movement/walk_forward/shi26_017.png" id="261_6f6qi"]
 [ext_resource type="Texture2D" uid="uid://vjn8k1qw2tb4" path="res://examples/mixed/shiki test/shiki/sprites/movement/walk_forward/shi26_018.png" id="262_h5kjp"]
-[ext_resource type="Script" uid="uid://dsgeotwu34dvi" path="res://addons/fray/src/state_mgmt/component/anim_tracker/animator_tracker_animation_player.gd" id="264_m1n8i"]
+[ext_resource type="Script" uid="uid://dsgeotwu34dvi" path="res://addons/fray/src/state_mgmt/component/anim_tracker/animator_tracker_animation_player.gd" id="264_lmg7t"]
+[ext_resource type="Script" uid="uid://c2gf3lngt37nl" path="res://addons/fray/src/hit/2d/hit_state_manager_2d.gd" id="267_12xlq"]
+[ext_resource type="Script" uid="uid://coyheirpdxili" path="res://addons/fray/src/hit/2d/hit_state_2d.gd" id="268_hxqwr"]
+[ext_resource type="Script" uid="uid://bm7ks4fjcaih5" path="res://addons/fray/src/hit/2d/hitbox_2d.gd" id="269_lndjr"]
+[ext_resource type="Script" uid="uid://bgrs7jwog7yol" path="res://examples/mixed/shiki test/hit attributes/hurt_attributes.gd.gd" id="270_hxqwr"]
+[ext_resource type="Script" uid="uid://c64xukhy6wqu1" path="res://examples/mixed/shiki test/hit attributes/hit_attribute.gd" id="271_hxqwr"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_0lp0o"]
 animations = [{
@@ -1269,6 +1274,18 @@ tracks/2/keys = {
 "update": 1,
 "values": [false, true]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../FrayHitStateManager2D/5l:active_hitboxes")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.116667, 0.166667, 0.283333),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [1, 3, 1, 1]
+}
 
 [sub_resource type="Animation" id="14"]
 resource_name = "5m"
@@ -1398,35 +1415,6 @@ tracks/1/keys = {
 "values": [0, 1, 2, 3, 4]
 }
 
-[sub_resource type="Animation" id="18"]
-resource_name = "Hitstun"
-length = 0.15
-step = 0.0166667
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [0, 1, 2]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:animation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": ["HITSTUN"]
-}
-
 [sub_resource type="Animation" id="19"]
 resource_name = "Jump_Squat"
 length = 0.05
@@ -1522,6 +1510,30 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../FrayHitStateManager2D/5l:active_hitboxes")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../FrayHitStateManager2D/idle:active_hitboxes")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
 }
 
 [sub_resource type="Animation" id="22"]
@@ -1828,6 +1840,64 @@ resource_name = "guard"
 length = 0.5
 step = 0.0166667
 
+[sub_resource type="Animation" id="Animation_hxqwr"]
+resource_name = "hitstun"
+length = 0.0166684
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["HITSTUN"]
+}
+
+[sub_resource type="Animation" id="18"]
+resource_name = "hurt_h"
+length = 0.15
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["HITSTUN"]
+}
+
 [sub_resource type="Animation" id="34"]
 resource_name = "idle"
 length = 2.0
@@ -1868,6 +1938,18 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../FrayHitStateManager2D/idle:active_hitboxes")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
 }
 
 [sub_resource type="Animation" id="35"]
@@ -2143,7 +2225,6 @@ _data = {
 &"5m-5m": SubResource("15"),
 &"Back_walk_start": SubResource("16"),
 &"Crouch_to_stand": SubResource("17"),
-&"Hitstun": SubResource("18"),
 &"Jump_Squat": SubResource("19"),
 &"KO": SubResource("20"),
 &"RESET": SubResource("21"),
@@ -2159,6 +2240,8 @@ _data = {
 &"fall_forward": SubResource("31"),
 &"fall_neutral": SubResource("32"),
 &"guard": SubResource("33"),
+&"hitstun": SubResource("Animation_hxqwr"),
+&"hurt_h": SubResource("18"),
 &"idle": SubResource("34"),
 &"j5h": SubResource("35"),
 &"j5l": SubResource("36"),
@@ -2175,10 +2258,10 @@ _data = {
 radius = 20.0
 height = 214.0
 
-[sub_resource type="Resource" id="Resource_andiv"]
-script = ExtResource("264_m1n8i")
+[sub_resource type="Resource" id="Resource_j5omc"]
+script = ExtResource("264_lmg7t")
 anim_player_path = NodePath("../AnimatedSprite2D/AnimationPlayer")
-metadata/_custom_type_script = "uid://dsgeotwu34dvi"
+metadata/_custom_type_script = "uid://onnpl6gwu1om"
 
 [sub_resource type="SystemFont" id="SystemFont_suouo"]
 font_names = PackedStringArray("Arial")
@@ -2196,6 +2279,31 @@ multichannel_signed_distance_field = true
 [sub_resource type="FontVariation" id="FontVariation_lmg7t"]
 base_font = SubResource("SystemFont_43il0")
 
+[sub_resource type="Resource" id="Resource_hxqwr"]
+script = ExtResource("270_hxqwr")
+is_blocking = false
+block_type = "normal"
+armor = false
+metadata/_custom_type_script = "uid://bgrs7jwog7yol"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hxqwr"]
+size = Vector2(70, 218.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lndjr"]
+size = Vector2(70, 218.5)
+
+[sub_resource type="Resource" id="Resource_lndjr"]
+script = ExtResource("271_hxqwr")
+damage = 5
+block_damage = 0
+unblockable = false
+hitstun_frames = 15
+hitstun_block_frames = 0
+metadata/_custom_type_script = "uid://c64xukhy6wqu1"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vs1sw"]
+size = Vector2(121, 47)
+
 [node name="Shiki" type="CharacterBody2D"]
 script = ExtResource("1_3gkhh")
 
@@ -2212,12 +2320,13 @@ libraries = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(-4, -115)
 shape = SubResource("CapsuleShape2D_cs454")
 
 [node name="FrayAnimationObserver" type="Node" parent="."]
 script = ExtResource("2_3loud")
-tracker = SubResource("Resource_andiv")
+tracker = SubResource("Resource_j5omc")
 
 [node name="FrayStateMachine" type="Node" parent="."]
 script = ExtResource("3_03701")
@@ -2258,5 +2367,58 @@ theme_override_fonts/font = SubResource("FontVariation_lmg7t")
 text = "CURRENT SITUATION"
 horizontal_alignment = 1
 
+[node name="NormalJumpReset" type="Timer" parent="."]
+
+[node name="FrayHitStateManager2D" type="Node2D" parent="." node_paths=PackedStringArray("source")]
+script = ExtResource("267_12xlq")
+source = NodePath("..")
+
+[node name="idle" type="Node2D" parent="FrayHitStateManager2D" node_paths=PackedStringArray("source")]
+script = ExtResource("268_hxqwr")
+source = NodePath("../..")
+active_hitboxes = 1
+metadata/_editor_prop_ptr_source = NodePath("../..")
+
+[node name="hurt" type="Area2D" parent="FrayHitStateManager2D/idle"]
+script = ExtResource("269_lndjr")
+attribute = SubResource("Resource_hxqwr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FrayHitStateManager2D/idle/hurt"]
+position = Vector2(-3, -112)
+shape = SubResource("RectangleShape2D_hxqwr")
+debug_color = Color(0, 0.5, 1, 0.5)
+
+[node name="5l" type="Node2D" parent="FrayHitStateManager2D" node_paths=PackedStringArray("source")]
+script = ExtResource("268_hxqwr")
+source = NodePath("../..")
+active_hitboxes = 0
+metadata/_editor_prop_ptr_source = NodePath("../..")
+
+[node name="hurt" type="Area2D" parent="FrayHitStateManager2D/5l"]
+visible = false
+monitoring = false
+monitorable = false
+script = ExtResource("269_lndjr")
+attribute = SubResource("Resource_hxqwr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FrayHitStateManager2D/5l/hurt"]
+position = Vector2(-3, -112)
+shape = SubResource("RectangleShape2D_lndjr")
+debug_color = Color(0, 0.5, 1, 0.5)
+
+[node name="FrayHitbox2D" type="Area2D" parent="FrayHitStateManager2D/5l"]
+visible = false
+monitoring = false
+monitorable = false
+script = ExtResource("269_lndjr")
+attribute = SubResource("Resource_lndjr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FrayHitStateManager2D/5l/FrayHitbox2D"]
+position = Vector2(92.5, -51)
+shape = SubResource("RectangleShape2D_vs1sw")
+debug_color = Color(1, 0, 0, 0.5)
+
 [connection signal="animation_finished" from="AnimatedSprite2D/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="state_changed" from="FrayStateMachine" to="." method="_on_fray_state_machine_state_changed"]
+[connection signal="timeout" from="NormalJumpReset" to="." method="_on_normal_jump_reset_timeout"]
+[connection signal="hitbox_intersected" from="FrayHitStateManager2D" to="." method="_on_fray_hit_state_manager_2d_hitbox_intersected"]

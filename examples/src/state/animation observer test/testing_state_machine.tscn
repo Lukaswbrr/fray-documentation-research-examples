@@ -175,7 +175,7 @@ attribute = SubResource("Resource_f5e5s")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D/FrayHitbox2D"]
 position = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_2adbt")
-debug_color = Color(0, 0, 1, 0.5)
+debug_color = Color(0, 0, 0, 0.5)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(1.5, 3.5)

@@ -1,11 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://bgwni1j7pdm47"]
+[gd_scene load_steps=4 format=3 uid="uid://bgwni1j7pdm47"]
 
 [ext_resource type="PackedScene" uid="uid://vc4yfaiu2cse" path="res://examples/mixed/shiki test/testing_shiki.tscn" id="1_fkowl"]
+[ext_resource type="Script" uid="uid://cfop4uto8i8gb" path="res://examples/mixed/shiki test/testing_stage_shiki.gd" id="1_najk4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_najk4"]
 size = Vector2(1216.5, 20)
 
 [node name="Node2D" type="CanvasLayer"]
+script = ExtResource("1_najk4")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
@@ -25,3 +27,11 @@ shape = SubResource("RectangleShape2D_najk4")
 
 [node name="Shiki" parent="." instance=ExtResource("1_fkowl")]
 position = Vector2(216, 630)
+
+[node name="DualShiki" parent="." instance=ExtResource("1_fkowl")]
+position = Vector2(863, 630)
+right_side = true
+fray_device = 1
+
+[connection signal="attacked" from="Shiki" to="Shiki" method="_on_attacked"]
+[connection signal="attacked" from="DualShiki" to="Shiki" method="_on_dual_shiki_attacked"]
