@@ -269,8 +269,8 @@
 [ext_resource type="Script" uid="uid://c2gf3lngt37nl" path="res://addons/fray/src/hit/2d/hit_state_manager_2d.gd" id="267_12xlq"]
 [ext_resource type="Script" uid="uid://coyheirpdxili" path="res://addons/fray/src/hit/2d/hit_state_2d.gd" id="268_hxqwr"]
 [ext_resource type="Script" uid="uid://bm7ks4fjcaih5" path="res://addons/fray/src/hit/2d/hitbox_2d.gd" id="269_lndjr"]
-[ext_resource type="Script" uid="uid://bgrs7jwog7yol" path="res://examples/mixed/shiki test/hit attributes/hurt_attributes.gd.gd" id="270_hxqwr"]
-[ext_resource type="Script" uid="uid://c64xukhy6wqu1" path="res://examples/mixed/shiki test/hit attributes/hit_attribute.gd" id="271_hxqwr"]
+[ext_resource type="Script" uid="uid://bgrs7jwog7yol" path="res://examples/mixed/hit attributes/hurt_attributes.gd" id="270_hxqwr"]
+[ext_resource type="Script" uid="uid://c64xukhy6wqu1" path="res://examples/mixed/hit attributes/hit_attribute.gd" id="271_hxqwr"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_0lp0o"]
 animations = [{
